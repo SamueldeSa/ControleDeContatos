@@ -46,23 +46,68 @@ namespace ControleDeContatos.Controllers
 
         public IActionResult Remover(int id)
         {
-            _contatoRepositorio.Remover(id);
-            return RedirectToAction("Index");
+            try
+            {
+                bool remover = _contatoRepositorio.Remover(id);
+                if(remover) 
+                {
+                    TempData["MensagemSucesso"] = "Contato removido com sucesso";
+                }
+                else
+                {
+                    TempData["MensagemErro"] = "Contato não removido";
+                }
+                return RedirectToAction("Index");
+            }
+            catch(System.Exception erro)
+            {
+                TempData["MensagemErro"] = $"Contato não removido, mais detalhes: {erro.Message}";
+                return RedirectToAction("Index");
+            }
         }
 
         [HttpPost]
         public IActionResult Criar(ContatoModel contato)
         {
-            _contatoRepositorio.Adicionar(contato);
-            return RedirectToAction("Index");
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _contatoRepositorio.Adicionar(contato);
+                    TempData["MensagemSucesso"] = "Contato cadastrado com sucesso";
+                    return RedirectToAction("Index");
+                }
+
+                return View(contato);
+            }
+            catch(System.Exception erro)
+            {
+                TempData["MensagemErro"] = $"Desculpe, contato não cadastrado, detalhe do erro: {erro.Message}";
+                return RedirectToAction("Index");
+            }
         }
 
 
         [HttpPost]
         public IActionResult Alterar(ContatoModel contato)
         {
-            _contatoRepositorio.Atualizar(contato);
-            return RedirectToAction("Index");
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _contatoRepositorio.Atualizar(contato);
+                    TempData["MensagemSucesso"] = "Contato alterado com sucesso";
+                    return RedirectToAction("Index");
+                }
+                return View("Editar", contato);
+            }
+            catch (System.Exception erro)
+            {
+                TempData["MensagemErro"] = $"Desculpe, contato não atualizado, detalhe do erro: {erro.Message}";
+                return RedirectToAction("Index");
+            }
         }
+
+
     }
 }
