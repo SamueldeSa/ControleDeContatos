@@ -5,10 +5,10 @@
 
 <div class="text-center">
 
-    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-        <a class="btn btn-primary" asp-controller="Contato" asp-action="Criar" role="button">Adicionar novo contato</a>
+     <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+         <a class="btn btn-primary" asp-controller="Contato" asp-action="Criar" role="button">Adicionar novo contato</a>
     </div>
-    
+
     <br />
 
     @if (TempData["MensagemSucesso"] != null)
@@ -39,7 +39,6 @@
                 <th scope="col">E-mail</th>
                 <th scope="col">Celular</th>
                 <th scope="col"></th>
-
             </tr>
         </thead>
         <tbody class="table-group-divider">
@@ -61,7 +60,10 @@
                     </tr>
                 }
             }
-
+            else
+            {
+                <tr class="odd"><td valign="top" colspan="5">Nenhum contato encontrado</td></tr>
+            }
 
         </tbody>
     </table>

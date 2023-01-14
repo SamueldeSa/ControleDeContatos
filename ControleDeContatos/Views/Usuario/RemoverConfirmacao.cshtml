@@ -1,0 +1,16 @@
+﻿@model UsuarioModel 
+@{
+    ViewData["Title"] = "Comfirmação de remoção";
+}
+
+<div class="text-center">
+    <h3>Realmente deseja remover o usuário @Model.Nome </h3>
+</div>
+
+<a class="btn btn-primary btn-block" asp-action="Index" asp-controller="Usuario" asp-route-id="@Model.Id" role="button">Cancelar remoção</a>
+<a class="btn btn-danger btn-block"  asp-action="Remover" asp-controller="Usuario" asp-route-id="@Model.Id" role="button">Confirmar remoção</a>
+
+
+
+
+
