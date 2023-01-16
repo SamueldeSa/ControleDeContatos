@@ -39,7 +39,7 @@ function getDatatable(id) {
     });
 }
 
-$('.close-alert').click(function() {
+$('.close-alert').click(function () {
     $('.alert').hide('hide');
-})
+});
 
