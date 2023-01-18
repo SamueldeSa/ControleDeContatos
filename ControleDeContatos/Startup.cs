@@ -1,7 +1,9 @@
 using ControleDeContatos.Data;
+using ControleDeContatos.Helper;
 using ControleDeContatos.Repositorio;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -32,8 +34,19 @@ namespace ControleDeContatos
             services.AddControllersWithViews();
             services.AddEntityFrameworkSqlServer()
                 .AddDbContext<BancoContext>(o => o.UseSqlServer(Configuration.GetConnectionString("database")));
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
             services.AddScoped<IContatoRepositorio, ContatoRepositorio>();
             services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
+            services.AddScoped<ISessao, Sessao>();
+
+            services.AddSession(o =>
+            {
+                o.Cookie.HttpOnly = true;
+                o.Cookie.IsEssential = true;
+            });
+            
         
         }
 
@@ -53,6 +66,8 @@ namespace ControleDeContatos
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
