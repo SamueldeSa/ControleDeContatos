@@ -64,18 +64,18 @@ namespace ControleDeContatos.Controllers
         }
 
         [HttpPost]
-        public IActionResult Criar(UsuarioModel contato)
+        public IActionResult Criar(UsuarioModel usuario)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    _usuarioRepositorio.Adicionar(contato);
+                    usuario = _usuarioRepositorio.Adicionar(usuario);
                     TempData["MensagemSucesso"] = "Usuário cadastrado com sucesso";
                     return RedirectToAction("Index");
                 }
 
-                return View(contato);
+                return View(usuario);
             }
             catch (System.Exception erro)
             {
