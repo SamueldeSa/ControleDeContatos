@@ -21,6 +21,11 @@ namespace ControleDeContatos.Repositorio
             return _context.Usuarios.FirstOrDefault(x => x.Login.ToUpper() == login.ToUpper());
         }
 
+        public UsuarioModel BuscarEmailELogin(string email, string login)
+        {
+            return _context.Usuarios.FirstOrDefault(x => x.Email.ToUpper() == email.ToUpper() && x.Login.ToUpper() == login.ToUpper() );
+        }
+
         public UsuarioModel ListarPorId(int id)
         {
             return _context.Usuarios.FirstOrDefault(x => x.Id == id);
