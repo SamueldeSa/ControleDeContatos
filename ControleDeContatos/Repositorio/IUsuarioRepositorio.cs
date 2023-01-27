@@ -19,6 +19,8 @@ namespace ControleDeContatos.Repositorio
 
         UsuarioModel Atualizar(UsuarioModel usuario);
 
+        UsuarioModel AlterarSenha(AlterarSenhaModel alterarSenhaModel);
+
         bool Remover(int id);
 
 
