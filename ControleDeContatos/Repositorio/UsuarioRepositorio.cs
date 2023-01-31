@@ -9,9 +9,9 @@ namespace ControleDeContatos.Repositorio
 {
     public class UsuarioRepositorio : IUsuarioRepositorio
     {
-        private readonly BancoContext _context;
+        private readonly BancoContent _context;
 
-        public UsuarioRepositorio(BancoContext bancoContext)
+        public UsuarioRepositorio(BancoContent bancoContext)
         {
             _context = bancoContext;
         }

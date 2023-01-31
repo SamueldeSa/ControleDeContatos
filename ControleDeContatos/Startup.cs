@@ -33,7 +33,7 @@ namespace ControleDeContatos
         {
             services.AddControllersWithViews();
             services.AddEntityFrameworkSqlServer()
-                .AddDbContext<BancoContext>(o => o.UseSqlServer(Configuration.GetConnectionString("database")));
+                .AddDbContext<BancoContent>(o => o.UseSqlServer(Configuration.GetConnectionString("database")));
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 

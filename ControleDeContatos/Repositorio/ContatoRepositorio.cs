@@ -8,9 +8,9 @@ namespace ControleDeContatos.Repositorio
 {
     public class ContatoRepositorio : IContatoRepositorio
     {
-        private readonly BancoContext _context;
+        private readonly BancoContent _context;
 
-        public ContatoRepositorio(BancoContext bancoContext)
+        public ContatoRepositorio(BancoContent bancoContext)
         {
             _context = bancoContext;
         }
@@ -22,9 +22,9 @@ namespace ControleDeContatos.Repositorio
         }
 
 
-        public List<ContatoModel> BuscarTodos()
+        public List<ContatoModel> BuscarTodos(int usuarioId)
         {
-            return _context.Contatos.ToList();
+            return _context.Contatos.Where(x => x.UsuarioId == usuarioId).ToList();
         }
 
 

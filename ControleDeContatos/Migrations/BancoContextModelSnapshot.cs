@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ControleDeContatos.Migrations
 {
-    [DbContext(typeof(BancoContext))]
+    [DbContext(typeof(BancoContent))]
     partial class BancoContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -38,7 +38,12 @@ namespace ControleDeContatos.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("UsuarioId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Contatos");
                 });
@@ -57,23 +62,34 @@ namespace ControleDeContatos.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Login")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nome")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Perfil")
                         .HasColumnType("int");
 
                     b.Property<string>("Senha")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Usuarios");
+                });
+
+            modelBuilder.Entity("ControleDeContatos.Models.ContatoModel", b =>
+                {
+                    b.HasOne("ControleDeContatos.Models.UsuarioModel", "Usuario")
+                        .WithMany("Contatos")
+                        .HasForeignKey("UsuarioId");
                 });
 #pragma warning restore 612, 618
         }
